@@ -19,23 +19,21 @@ label start:
     call chapter_0
     return
 
-label variables:
-    $ chapter0_network = Network({}, 0)
-    return
-
 screen stress_counter:
     hbox:
         textbutton "Stress: [stress]" action Show("pop_up")
 
 label chapter_0:
     call variables
-    call node_x
+    call node_6
     return
     
-label node_x:    
+label node_6:
     #scene change stairs area
     show screen stress_counter
     show emma_neutral
+
+    $ currentNode = "node_6"
 
     "You walk towards Tapal Cafeteria, trying to clear your head of all the people who are mean to you on a daily basis and before you know it, you’re standing at the door of Tapal Café"
 
@@ -83,13 +81,23 @@ label node_x:
     
     menu:
         "Yeah, just tired of the annoying people I have to tolerate everyday":
-            call node_x_1
+            $ relationKeeper(chapter0_network, currentNode, "Choice1")
+            call node_6_1
 
         "It’s nothing, let’s just eat":
-            call node_x_2
+            $ relationKeeper(chapter0_network, currentNode, "Choice2")
+            call node_6_2
 
         "Just mind your own business and leave me alone for a while okay?":
-            call node_x_3
+            $ relationKeeper(chapter0_network, currentNode, "Choice3")
+            call node_6_3
+
+    call node_7
+
+    return
+
+label node_7:
+    $ currentNode = "node_7"
 
     "You all finish your lunch and everybody prepares to head for class. You still have time till your next class starts so you go to the Dhabba area to chill after you say goodbye to everyone"
 
@@ -113,10 +121,19 @@ label node_x:
 
     menu:
         "It’s cool, I’m interested in his gym routine":
-            call node_x_4
+            $ relationKeeper(chapter0_network, currentNode, "Choice1")
+            call node_7_1
 
         "Yeah lmao stop using the gym as a personality trait":
-            call node_x_5
+            $ relationKeeper(chapter0_network, currentNode, "Choice2")
+            call node_7_2
+
+    call node_8
+
+    return
+
+label node_8:
+    $ currentNode = "node_8"
 
     zayn "Oh my God, I completely forgot about my singing lessons today at 8. I’m too tired to go today"
 
@@ -128,16 +145,27 @@ label node_x:
 
     menu:
         "Same as you, a pop fan":
-            call node_x_6
+            $ relationKeeper(chapter0_network, currentNode, "Choice1")
+            call node_8_1
 
         "Eastern music mostly":
-            call node_x_7
+            $ relationKeeper(chapter0_network, currentNode, "Choice2")
+            call node_8_2
 
         "EDM stuff is what I jam to":
-            call node_x_8
+            $ relationKeeper(chapter0_network, currentNode, "Choice3")
+            call node_8_3
 
         "Death Metal!!":
-            call node_x_9
+            $ relationKeeper(chapter0_network, currentNode, "Choice4")
+            call node_8_4
+
+    call node_9
+
+    return
+
+label node_9:
+    $ currentNode = "node_9"
 
     player "So what’re you guys up to?"
 
@@ -147,13 +175,23 @@ label node_x:
 
     menu:
         "Go to the gym with John":
-            call node_x_10
+            $ relationKeeper(chapter0_network, currentNode, "Choice1")
+            call node_9_1
 
         "Go to the music room with Zayn":
-            call node_x_11
+            $ relationKeeper(chapter0_network, currentNode, "Choice2")
+            call node_9_2
 
         "Stay here by yourself":
-            call node_x_12
+            $ relationKeeper(chapter0_network, currentNode, "Choice3")
+            call node_9_3
+
+    call node_10
+
+    return
+
+label node_10:
+    $ currentNode = "node_10"
 
     "Your leftover classes resume"
 
@@ -193,14 +231,16 @@ label node_x:
 
     player "Yeah, he has those whenever he sees me. He was abusing his power as club president a while back and I got SL and the professors involved which made him look really bad so he despises me for it. Anyway thanks for helping me!"
 
-    sean "Any time ma man [playerName]. It’s been a while since we’ve talked, what’s up nowadays"
+    sean "Any time man! It’s been a while since we’ve talked, what’s up nowadays"
 
     menu:
         "Uhhh nothing. I should leave.":
-            call node_x_13
+            $ relationKeeper(chapter0_network, currentNode, "Choice1")
+            call node_10_1
 
         "You know the same old same old; trying to just pass the semester and failing miserably":
-            call node_x_14
+            $ relationKeeper(chapter0_network, currentNode, "Choice2")
+            call node_10_2
 
     "You wave to Sean and leave"
 
@@ -208,27 +248,32 @@ label node_x:
 
     "You finally reach home and drop dead on the bed. You ponder over all that happened today and as you’re dreaming, you fall asleep"
 
+    call node_chp0_end
+
     return
 
-label node_x_1:
+label node_chp0_end:
+    return
+
+label node_6_1:
     #relation all + 2
 
     asad "Ohhh, you wanna talk about it?"
 
     menu:
         "I’d rather not…":
-            call node_x_1_1
+            call node_6_1_1
 
         "It’s just these few people bullying me and I’m started to grow tired of it":
-            call node_x_1_2
+            call node_6_1_2
 
         "There’s a few people I’m considering murdering, I might actually do it":
-            call node_x_1_3
+            call node_6_1_3
 
 
     return
 
-label node_x_1_1:
+label node_6_1_1:
     #relation all + 0
 
     alaina "Whatever makes you comfortable, but know that we’re all here for you any time you need to rant or anything okay?~~"
@@ -239,7 +284,7 @@ label node_x_1_1:
 
     return
 
-label node_x_1_2:
+label node_6_1_2:
     #relation all + 2
 
     "You continue to talk about the people bullying you in university that you can’t do anything to"
@@ -254,7 +299,7 @@ label node_x_1_2:
 
     return
 
-label node_x_1_3:
+label node_6_1_3:
     #relation all -2
 
     alaina "Hehe, [playerName], you’re joking…right?"
@@ -273,26 +318,26 @@ label node_x_1_3:
 
     return
 
-label node_x_2:
+label node_6_2:
     #relation all +0
 
     ayesha "You sure? You can always talk to us you know, we’ll always be here for you…"
 
     menu: 
         "No it’s cool. I know I can trust you guys. I’ll be sure to let y’all know if something is up":
-            call node_x_2_1
+            call node_6_2_1
         
         "Please, just leave me alone for a while to manage my stuff okay? No need to be so nosy where y’all don’t belong":
-            call node_x_2_2
+            call node_6_2_2
 
         "I guess I could tell you guys…":
-            call node_x_2_3
+            call node_6_2_3
 
 
     return
 
 
-label node_x_2_1:
+label node_6_2_1:
     #relation all +1
 
     alaina "Whatever makes you comfortable, but know that we’re all here for you okay? If anything’s bothering you or you need help be sure to reach out m’kay?~~"
@@ -303,7 +348,7 @@ label node_x_2_1:
 
     return 
 
-label node_x_2_2:
+label node_6_2_2:
     #relation all -2
 
     amil "Amil: “No need to lash out [playerName], she was just worried is all"
@@ -312,7 +357,7 @@ label node_x_2_2:
 
     return
 
-label node_x_2_3:
+label node_6_2_3:
     #relation all +2
 
     "You tell everyone about the people bullying you in university and that you’re frustrated because of it"
@@ -327,7 +372,7 @@ label node_x_2_3:
 
     return
 
-label node_x_3:
+label node_6_3:
     #player image changes to angry
     #relation all -4
 
@@ -341,49 +386,49 @@ label node_x_3:
 
     return 
 
-label node_x_4:
+label node_7_1:
     #relation John +2
     
     zayn "That’s a first I’ve heard someone say that"
 
     return
 
-label node_x_5:
+label node_7_2:
     #relation John -2
 
     john "Dude shut up or I’ll seriously throw you off a ledge or something"
 
     return
 
-label node_x_6:
+label node_8_1:
     #relation Zayn +2
 
     zayn "Ayyy man, gang gang"
 
     return 
 
-label node_x_7:
+label node_8_2:
     #relation Zayn +1
 
     zayn "Ahhh sitars and tablas, nice, the classics"
 
     return 
 
-label node_x_8:
+label node_8_3:
     #relation Zayn +1
 
     zayn "Ayyy party music, love it!"
 
     return
 
-label node_x_9:
+label node_8_4:
     #relation Zayn -2
 
     zayn "Ouch…sorry for your loss"
 
     return
 
-label node_x_10:
+label node_9_1:
     #relation John +3
 
     player "Guess I’ll hit the weights"
@@ -392,7 +437,7 @@ label node_x_10:
 
     return
 
-label node_x_11:
+label node_9_2:
     #relation Zayn +3
 
     player "Guess I’m learning the violin today"
@@ -401,21 +446,21 @@ label node_x_11:
 
     return 
 
-label node_x_12:
+label node_9_3:
     #relation both +0
 
     "John and Zayn both leave. You stay there, bask in the sun and wait till it’s time for your classes. Once it is, you go to your classes"
 
     return 
 
-label node_x_13:
+label node_10_1:
     #relation Sean -2
 
     sean "Uhhh okay, if you say so. Bye!"
 
     return 
 
-label node_x_14:
+label node_10_2:
     #relation Sean +2
 
     sean "Hahaha I know what you mean. Playing sports is the only thing that keeps me sane in this stressful time. You should give it a try too"
@@ -430,4 +475,5 @@ label node_x_14:
 
     player "Totally, see you later!"
 
-    return
+    return 
+
